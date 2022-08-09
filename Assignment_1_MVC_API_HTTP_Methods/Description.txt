@@ -1,0 +1,15 @@
+Assignment by Raviraj
+
+---------------------
+
+Create .net core web api project, create controllers and action methods. Implement attirbute routing  
+
+
+Set Default Route 
+	
+Use Route decorator 
+	
+Use appropriate HTTP Methods 
+	
+Apply restful standards 
+
