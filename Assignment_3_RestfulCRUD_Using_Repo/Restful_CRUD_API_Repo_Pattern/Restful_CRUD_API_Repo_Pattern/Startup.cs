@@ -2,11 +2,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Restful_CRUD_API_Repo_Pattern.Data;
+using Restful_CRUD_API_Repo_Pattern.DataAccess;
+using Restful_CRUD_API_Repo_Pattern.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +30,12 @@ namespace Restful_CRUD_API_Repo_Pattern
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddScoped<ICollegeService, CollegeService>();
+            //services.AddScoped<ICollegeDA, CollegeDA>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentDA, StudentDA>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
