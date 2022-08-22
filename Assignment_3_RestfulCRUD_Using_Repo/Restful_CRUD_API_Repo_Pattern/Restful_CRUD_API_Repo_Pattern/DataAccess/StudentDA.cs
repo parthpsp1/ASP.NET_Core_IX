@@ -1,7 +1,5 @@
 ﻿using Restful_CRUD_API_Repo_Pattern.Data;
 using Restful_CRUD_API_Repo_Pattern.Entities;
-using Restful_CRUD_API_Repo_Pattern.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,11 +8,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 {
     public interface IStudentDA {
 
-        public IEnumerable<Student> GetStudents();
-        public Student GetStudenyById(int id);
-        public Task<Student> AddStudent(Student studentObj);
-        public Student UpdateStudent(Student student, int Id);
-        public Student DeletStudent(int id);
+        public IEnumerable<StudentEntity> GetStudents();
+        public StudentEntity GetStudenyById(int id);
+        public Task<StudentEntity> AddStudent(StudentEntity studentObj);
+        public StudentEntity UpdateStudent(StudentEntity student, int Id);
+        public StudentEntity DeletStudent(int id);
 
     };
     public class StudentDA : IStudentDA
@@ -25,18 +23,18 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             _context = context;
         }
 
-        public IEnumerable<Student> GetStudents()
+        public IEnumerable<StudentEntity> GetStudents()
         {
             return _context.Student_Table.ToList();
         }
-        public async Task<Student> AddStudent(Student studentObj)
+        public async Task<StudentEntity> AddStudent(StudentEntity studentObj)
         {
             var add_student_obj = await _context.Student_Table.AddAsync(studentObj);
             _context.SaveChanges();
             return add_student_obj.Entity;
         }
 
-        public Student UpdateStudent(Student student, int Id)
+        public StudentEntity UpdateStudent(StudentEntity student, int Id)
         {
             var update_student_obj =  _context.Student_Table.Where(s => s.Id == Id).ToList();
             foreach(var element in update_student_obj)
@@ -57,7 +55,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             return student;
         }
 
-        public Student DeletStudent(int id)
+        public StudentEntity DeletStudent(int id)
         {
             var delete_student_obj = _context.Student_Table.Where(s => s.Id == id).FirstOrDefault();
             if (delete_student_obj.Id == id)
@@ -69,7 +67,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             return null;
         }
 
-        public Student GetStudenyById(int id)
+        public StudentEntity GetStudenyById(int id)
         {
             return _context.Student_Table.FirstOrDefault(s => s.Id == id);
         }

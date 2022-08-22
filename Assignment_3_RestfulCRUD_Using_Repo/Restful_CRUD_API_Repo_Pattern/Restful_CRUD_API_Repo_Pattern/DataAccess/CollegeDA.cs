@@ -1,7 +1,5 @@
 ﻿using Restful_CRUD_API_Repo_Pattern.Data;
 using Restful_CRUD_API_Repo_Pattern.Entity;
-//using Restful_CRUD_API_Repo_Pattern.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,11 +8,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 {
     public interface ICollegeDA
     {
-        IEnumerable<College> GetColleges();
-        College GetCollegeById(int id);
-        Task<College> AddCollege(College collegeObj);
-        College UpdateCollege(College college, int id);
-        College DeleteCollege(int id);
+        IEnumerable<CollegeEntity> GetColleges();
+        CollegeEntity GetCollegeById(int id);
+        Task<CollegeEntity> AddCollege(CollegeEntity collegeObj);
+        CollegeEntity UpdateCollege(CollegeEntity college, int id);
+        CollegeEntity DeleteCollege(int id);
     };
     public class CollegeDA : ICollegeDA
     {
@@ -24,15 +22,15 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
         {
             _context = context;
         }
-        public IEnumerable<College> GetColleges()
+        public IEnumerable<CollegeEntity> GetColleges()
         {
             return _context.College_Table.ToList();
         }
-        public College GetCollegeById(int id)
+        public CollegeEntity GetCollegeById(int id)
         {
             return _context.College_Table.FirstOrDefault(s => s.Id == id);
         }
-        public async Task<College> AddCollege(College collegeObj)
+        public async Task<CollegeEntity> AddCollege(CollegeEntity collegeObj)
         {
             var add_college_obj = await _context.College_Table.AddAsync(collegeObj);
             _context.SaveChanges();
@@ -49,7 +47,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
         //    await _context.SaveChanges();
         //    return add_college_obj.Entity;
         //}
-        public College UpdateCollege(College college, int id)
+        public CollegeEntity UpdateCollege(CollegeEntity college, int id)
         {
             var update_college_obj = _context.College_Table.Where(s => s.Id == id).ToList();
             foreach(var element in update_college_obj)
@@ -67,7 +65,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             return college;
         }
 
-        public College DeleteCollege(int id)
+        public CollegeEntity DeleteCollege(int id)
         {
             var delete_college_obj = _context.College_Table.Where(s => s.Id == id).FirstOrDefault();
             if( delete_college_obj.Id == id)

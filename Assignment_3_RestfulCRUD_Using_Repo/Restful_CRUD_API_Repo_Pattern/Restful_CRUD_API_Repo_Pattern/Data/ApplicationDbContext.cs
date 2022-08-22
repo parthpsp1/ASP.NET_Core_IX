@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restful_CRUD_API_Repo_Pattern.Entities;
 using Restful_CRUD_API_Repo_Pattern.Entity;
-using Restful_CRUD_API_Repo_Pattern.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restful_CRUD_API_Repo_Pattern.Data
 {
@@ -20,8 +15,8 @@ namespace Restful_CRUD_API_Repo_Pattern.Data
 
         }
 
-        public DbSet<Student> Student_Table { get; set; }
-        public DbSet<College> College_Table { get; set; }
+        public DbSet<StudentEntity> Student_Table { get; set; }
+        public DbSet<CollegeEntity> College_Table { get; set; }
 
     }
 }

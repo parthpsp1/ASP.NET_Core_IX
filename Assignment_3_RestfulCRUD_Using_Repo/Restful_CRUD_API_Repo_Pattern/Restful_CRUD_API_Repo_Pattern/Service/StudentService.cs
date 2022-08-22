@@ -12,7 +12,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         public StudentModel GetStudentById(int id);
         public Task<StudentModel> AddStudent(StudentModel studentModel);
         public StudentModel UpdateStudent(StudentModel studentModel, int Id);
-        public Student DeletStudent(int id);
+        public StudentEntity DeletStudent(int id);
 
     }
     public class StudentService : IStudentService
@@ -44,7 +44,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 
         public async Task<StudentModel> AddStudent(StudentModel studentModel)
         {
-            var new_student_entity = new Student
+            var new_student_entity = new StudentEntity
             {
                 Id = studentModel.Id,
                 FirstName = studentModel.FirstName,
@@ -61,7 +61,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 
         public StudentModel UpdateStudent(StudentModel studentModel, int Id)
         {
-            var update_student_entity = new Student
+            var update_student_entity = new StudentEntity
             {
                 FirstName = studentModel.FirstName,
                 LastName = studentModel.LastName,
@@ -74,10 +74,10 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             return new StudentModel { Id = update_student.Id };
         }
 
-        public Student DeletStudent(int id)
+        public StudentEntity DeletStudent(int id)
         {
             var delete_data = _studentDA.DeletStudent(id);
-            return new Student
+            return new StudentEntity
             {
                 Id = delete_data.Id,
                 FirstName = delete_data.FirstName,

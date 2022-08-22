@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Restful_CRUD_API_Repo_Pattern.Model
+namespace Restful_CRUD_API_Repo_Pattern.Entity
 {
-    public class CollegeModel
+    public class CollegeEntity
     {
         [Key]
         public int Id { get; set; }
