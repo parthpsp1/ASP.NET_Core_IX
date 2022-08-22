@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Restful_CRUD_API_Repo_Pattern.Model;
 using Restful_CRUD_API_Repo_Pattern.Service;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,17 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         public IActionResult GetStudent()
         {
             return Ok(_studentService.GetStudents());
+        }
+        [HttpPost]
+        public IActionResult AddStudent(StudentModel studentModel)
+        {
+            return Ok(_studentService.AddStudent(studentModel));
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStudent(StudentModel studentModel, int id)
+        {
+            return Ok(_studentService.UpdateStudent(studentModel, id));
         }
     }
 }

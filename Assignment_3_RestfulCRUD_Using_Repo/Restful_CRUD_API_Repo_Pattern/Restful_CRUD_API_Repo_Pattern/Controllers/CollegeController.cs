@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restful_CRUD_API_Repo_Pattern.Entity;
+using Restful_CRUD_API_Repo_Pattern.Model;
 using Restful_CRUD_API_Repo_Pattern.Service;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,18 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         {
             return Ok(_collegeService.GetCollege());
         }
+
+        [HttpPost]
+        public IActionResult AddCollege(CollegeModel collegeModel)
+        {
+            return Ok(_collegeService.AddCollege(collegeModel));
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStudent(CollegeModel collegeModel, int id)
+        {
+            return Ok(_collegeService.UpdateCollege(collegeModel, id));
+        }
+
     }
 }

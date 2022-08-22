@@ -9,7 +9,6 @@ namespace Restful_CRUD_API_Repo_Pattern.Model
     public class StudentModel
     {
         [Key]
-        [MaxLength(3), MinLength(1)]
         public int Id { get; set; }
 
         [Required]
@@ -21,19 +20,17 @@ namespace Restful_CRUD_API_Repo_Pattern.Model
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(50), MinLength(2)]
+        [MaxLength(50), MinLength(2), EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(50), MinLength(2)]
+        [MaxLength(50), MinLength(2), Phone]
         public string Phone { get; set; }
 
         [Required]
-        [MaxLength(50), MinLength(2)]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
-        [MaxLength(3), MinLength(1)]
         public int CollegeId { get; set; }
     }
 }
