@@ -67,7 +67,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
         public College DeleteCollege(int id)
         {
             var delete_college_obj = _context.College_Table.Where(s => s.Id == id).FirstOrDefault();
-            if(delete_college_obj.Id == id)
+            if( delete_college_obj.Id == id)
             {
                 _context.College_Table.Remove(delete_college_obj);
                 _context.SaveChanges();

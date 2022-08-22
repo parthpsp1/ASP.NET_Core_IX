@@ -59,7 +59,14 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 
         public Student DeletStudent(int id)
         {
-            throw new NotImplementedException();
+            var delete_student_obj = _context.Student_Table.Where(s => s.Id == id).FirstOrDefault();
+            if (delete_student_obj.Id == id)
+            {
+                _context.Student_Table.Remove(delete_student_obj);
+                _context.SaveChanges();
+                return delete_student_obj;
+            }
+            return null;
         }
     }
 }

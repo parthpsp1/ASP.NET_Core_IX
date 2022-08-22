@@ -35,5 +35,10 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         {
             return Ok(_studentService.UpdateStudent(studentModel, id));
         }
+        [HttpDelete]
+        public IActionResult DeleteStudent(int id)
+        {
+            return Ok(_studentService.DeletStudent(id));
+        }
     }
 }

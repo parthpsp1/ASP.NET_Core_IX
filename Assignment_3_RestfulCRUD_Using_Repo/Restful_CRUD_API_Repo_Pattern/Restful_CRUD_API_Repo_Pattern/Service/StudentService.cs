@@ -11,6 +11,8 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         public IEnumerable<StudentModel> GetStudents();
         Task<StudentModel> AddStudent(StudentModel studentModel);
         StudentModel UpdateStudent(StudentModel studentModel, int Id);
+        Student DeletStudent(int id);
+
     }
     public class StudentService : IStudentService
     {
@@ -69,6 +71,17 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             };
             var update_student = _studentDA.UpdateStudent(update_student_entity, Id);
             return new StudentModel { Id = update_student.Id };
+        }
+
+        public Student DeletStudent(int id)
+        {
+            var delete_data = _studentDA.DeletStudent(id);
+            return new Student
+            {
+                Id = delete_data.Id,
+                FirstName = delete_data.FirstName,
+                LastName = delete_data.LastName
+            };
         }
     }
 }
