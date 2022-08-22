@@ -27,6 +27,12 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
             return Ok(_collegeService.GetCollege());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetCollege(int id)
+        {
+            return Ok(_collegeService.GetCollegeById(id));
+        }
+
         [HttpPost]
         public IActionResult AddCollege(CollegeModel collegeModel)
         {

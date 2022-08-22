@@ -10,11 +10,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 {
     public interface IStudentDA {
 
-        IEnumerable<Student> GetStudents();
-        Task<Student> AddStudent(Student studentObj);
-        Student UpdateStudent(Student student, int Id);
-
-        Student DeletStudent(int id);
+        public IEnumerable<Student> GetStudents();
+        public Student GetStudenyById(int id);
+        public Task<Student> AddStudent(Student studentObj);
+        public Student UpdateStudent(Student student, int Id);
+        public Student DeletStudent(int id);
 
     };
     public class StudentDA : IStudentDA
@@ -67,6 +67,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
                 return delete_student_obj;
             }
             return null;
+        }
+
+        public Student GetStudenyById(int id)
+        {
+            return _context.Student_Table.FirstOrDefault(s => s.Id == id);
         }
     }
 }

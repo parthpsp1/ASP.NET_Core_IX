@@ -9,9 +9,10 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
     public interface IStudentService
     {
         public IEnumerable<StudentModel> GetStudents();
-        Task<StudentModel> AddStudent(StudentModel studentModel);
-        StudentModel UpdateStudent(StudentModel studentModel, int Id);
-        Student DeletStudent(int id);
+        public StudentModel GetStudentById(int id);
+        public Task<StudentModel> AddStudent(StudentModel studentModel);
+        public StudentModel UpdateStudent(StudentModel studentModel, int Id);
+        public Student DeletStudent(int id);
 
     }
     public class StudentService : IStudentService
@@ -82,6 +83,26 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
                 FirstName = delete_data.FirstName,
                 LastName = delete_data.LastName
             };
+        }
+
+        public StudentModel GetStudentById(int id)
+        {
+            var student_by_id = _studentDA.GetStudenyById(id);
+            if (student_by_id == null)
+                return null;
+            else
+            {
+                return new StudentModel
+                {
+                    Id = student_by_id.Id,
+                    FirstName = student_by_id.FirstName,
+                    LastName = student_by_id.LastName,
+                    DateOfBirth = student_by_id.DateOfBirth,
+                    Email = student_by_id.Email,
+                    Phone = student_by_id.Phone,
+                    CollegeId = student_by_id.CollegeId
+                };
+            }
         }
     }
 }

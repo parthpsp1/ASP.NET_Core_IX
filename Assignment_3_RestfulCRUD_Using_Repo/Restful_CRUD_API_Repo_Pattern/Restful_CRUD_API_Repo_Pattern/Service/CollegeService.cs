@@ -9,9 +9,10 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
     public interface ICollegeService
     {
         public IEnumerable<CollegeModel> GetCollege();
+        public CollegeModel GetCollegeById(int id);
         public Task<CollegeModel> AddCollege(CollegeModel collegeModel);
-        CollegeModel UpdateCollege(CollegeModel collegeModel, int id);
-        College DeleteCollege(int id);
+        public CollegeModel UpdateCollege(CollegeModel collegeModel, int id);
+        public College DeleteCollege(int id);
     }
     public class CollegeService : ICollegeService
     {
@@ -36,6 +37,23 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
                 });
             }
             return college_list;
+        }
+        public CollegeModel GetCollegeById(int id)
+        {
+            var college_by_id = _collegeDA.GetCollegeById(id);
+            if (college_by_id == null)
+                return null;
+            else
+            {
+                return new CollegeModel
+                {
+                    Id = college_by_id.Id,
+                    Name = college_by_id.Name,
+                    University = college_by_id.University,
+                    Address = college_by_id.Address,
+                    District = college_by_id.District
+                };
+            }
         }
 
         public async Task<CollegeModel> AddCollege(CollegeModel collegeModel)
@@ -66,7 +84,6 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             var update_college = _collegeDA.UpdateCollege(update_college_entity, Id);
             return new CollegeModel { Id = update_college.Id };
         }
-
         public College DeleteCollege(int id)
         {
             var delete_data = _collegeDA.DeleteCollege(id);
@@ -74,6 +91,9 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             {
                 Id = delete_data.Id,
                 Name = delete_data.Name,
+                Address = delete_data.Address,
+                District = delete_data.District,
+                University = delete_data.University
             };
         }
     }

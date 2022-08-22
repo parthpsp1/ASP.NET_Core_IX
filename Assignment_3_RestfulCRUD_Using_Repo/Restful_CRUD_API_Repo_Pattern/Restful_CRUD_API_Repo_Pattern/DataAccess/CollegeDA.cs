@@ -10,8 +10,8 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 {
     public interface ICollegeDA
     {
-
         IEnumerable<College> GetColleges();
+        College GetCollegeById(int id);
         Task<College> AddCollege(College collegeObj);
         College UpdateCollege(College college, int id);
         College DeleteCollege(int id);
@@ -27,7 +27,10 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
         public IEnumerable<College> GetColleges()
         {
             return _context.College_Table.ToList();
-
+        }
+        public College GetCollegeById(int id)
+        {
+            return _context.College_Table.FirstOrDefault(s => s.Id == id);
         }
         public async Task<College> AddCollege(College collegeObj)
         {

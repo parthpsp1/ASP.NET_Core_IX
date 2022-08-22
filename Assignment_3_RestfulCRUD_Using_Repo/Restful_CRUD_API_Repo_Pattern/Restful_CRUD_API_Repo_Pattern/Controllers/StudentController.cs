@@ -24,6 +24,13 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         {
             return Ok(_studentService.GetStudents());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetStudentById(int id)
+        {
+            return Ok(_studentService.GetStudentById(id));
+        }
+
         [HttpPost]
         public IActionResult AddStudent(StudentModel studentModel)
         {
