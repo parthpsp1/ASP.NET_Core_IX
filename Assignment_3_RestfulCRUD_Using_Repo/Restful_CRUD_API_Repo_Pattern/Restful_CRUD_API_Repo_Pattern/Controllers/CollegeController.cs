@@ -34,10 +34,15 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateStudent(CollegeModel collegeModel, int id)
+        public IActionResult UpdateCollege(CollegeModel collegeModel, int id)
         {
             return Ok(_collegeService.UpdateCollege(collegeModel, id));
         }
 
+        [HttpDelete]
+        public IActionResult DeleteCollege(int id)
+        {
+            return Ok(_collegeService.DeleteCollege(id));
+        }
     }
 }

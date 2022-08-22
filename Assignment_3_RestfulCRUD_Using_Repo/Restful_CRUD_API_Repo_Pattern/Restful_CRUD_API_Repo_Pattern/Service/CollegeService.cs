@@ -11,6 +11,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         public IEnumerable<CollegeModel> GetCollege();
         public Task<CollegeModel> AddCollege(CollegeModel collegeModel);
         CollegeModel UpdateCollege(CollegeModel collegeModel, int id);
+        College DeleteCollege(int id);
     }
     public class CollegeService : ICollegeService
     {
@@ -64,6 +65,16 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             };
             var update_college = _collegeDA.UpdateCollege(update_college_entity, Id);
             return new CollegeModel { Id = update_college.Id };
+        }
+
+        public College DeleteCollege(int id)
+        {
+            var delete_data = _collegeDA.DeleteCollege(id);
+            return new College
+            {
+                Id = delete_data.Id,
+                Name = delete_data.Name,
+            };
         }
     }
 }

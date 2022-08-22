@@ -14,6 +14,8 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
         Task<Student> AddStudent(Student studentObj);
         Student UpdateStudent(Student student, int Id);
 
+        Student DeletStudent(int id);
+
     };
     public class StudentDA : IStudentDA
     {
@@ -53,6 +55,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
                 }
             }
             return student;
+        }
+
+        public Student DeletStudent(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
