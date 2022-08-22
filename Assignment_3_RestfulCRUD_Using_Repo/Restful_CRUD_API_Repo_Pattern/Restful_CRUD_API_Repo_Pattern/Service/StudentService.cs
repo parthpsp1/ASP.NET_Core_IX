@@ -1,9 +1,6 @@
 ﻿using Restful_CRUD_API_Repo_Pattern.DataAccess;
 using Restful_CRUD_API_Repo_Pattern.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restful_CRUD_API_Repo_Pattern.Service
 {
@@ -14,7 +11,6 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
     public class StudentService : IStudentService
     {
         private readonly IStudentDA _studentDA;
-
         public StudentService(IStudentDA studentDA)
         {
             _studentDA = studentDA;
@@ -23,7 +19,8 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         {
             var all_students = _studentDA.GetStudents();
             List<StudentModel> list = new();
-            foreach (var student in all_students){
+            foreach (var student in all_students)
+            {
                 list.Add( new StudentModel
                 {
                     Id = student.Id,

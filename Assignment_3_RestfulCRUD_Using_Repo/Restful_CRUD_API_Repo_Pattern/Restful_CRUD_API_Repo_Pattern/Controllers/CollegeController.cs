@@ -13,16 +13,17 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
     [ApiController]
     public class CollegeController : ControllerBase
     {
-        //private readonly CollegeService _collegeService;
-        //public CollegeController(CollegeService collegeService)
-        //{
-        //    _collegeService = collegeService;
-        //}
+        private readonly ICollegeService _collegeService;
 
-        //[HttpGet]
-        //public async Task<IEnumerable<College>> GetEmployees()
-        //{
-        //    return await CollegeService.GetCollege();
-        //}
+        public CollegeController(ICollegeService collegeService)
+        {
+            _collegeService = collegeService;
+        }
+
+        [HttpGet]
+        public IActionResult GetCollege()
+        {
+            return Ok(_collegeService.GetCollege());
+        }
     }
 }

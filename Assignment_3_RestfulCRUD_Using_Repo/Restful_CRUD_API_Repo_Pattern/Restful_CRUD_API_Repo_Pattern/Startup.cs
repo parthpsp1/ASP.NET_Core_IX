@@ -32,8 +32,8 @@ namespace Restful_CRUD_API_Repo_Pattern
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<ICollegeService, CollegeService>();
-            //services.AddScoped<ICollegeDA, CollegeDA>();
+            services.AddScoped<ICollegeDA, CollegeDA>();
+            services.AddScoped<ICollegeService, CollegeService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentDA, StudentDA>();
             services.AddControllers();

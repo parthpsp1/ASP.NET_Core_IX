@@ -1,28 +1,36 @@
-﻿using Restful_CRUD_API_Repo_Pattern.Data;
-using Restful_CRUD_API_Repo_Pattern.DataAccess;
+﻿using Restful_CRUD_API_Repo_Pattern.DataAccess;
 using Restful_CRUD_API_Repo_Pattern.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restful_CRUD_API_Repo_Pattern.Service
 {
     public interface ICollegeService
     {
-        IEnumerable<CollegeModel> GetCollege();
+        public IEnumerable<CollegeModel> GetCollege();
     }
     public class CollegeService : ICollegeService
     {
-
-        public CollegeService(CollegeDA collegeDA)
+        private readonly ICollegeDA _collegeDA;
+        public CollegeService(ICollegeDA collegeDA)
         {
-            
+            _collegeDA = collegeDA;
         }
-
         public IEnumerable<CollegeModel> GetCollege()
         {
-            throw new NotImplementedException();
+            var all_colleges = _collegeDA.GetColleges();
+            List<CollegeModel> college_list = new();
+            foreach (var element in all_colleges)
+            {
+                college_list.Add(new CollegeModel
+                {
+                    Id = element.Id,
+                    Name = element.Name,
+                    University = element.University,
+                    Address = element.Address,
+                    District = element.District
+                });
+            }
+            return college_list;
         }
     }
 }
