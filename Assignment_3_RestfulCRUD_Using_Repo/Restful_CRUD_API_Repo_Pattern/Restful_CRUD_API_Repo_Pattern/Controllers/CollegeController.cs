@@ -24,25 +24,25 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCollege(int id)
         {
-            return Ok(_collegeService.GetCollegeById(id));
+            return Ok(_collegeService.Colleges(id));
         }
 
         [HttpPost]
-        public IActionResult AddCollege(CollegeModel collegeModel)
+        public IActionResult College(CollegeModel collegeModel)
         {
-            return Ok(_collegeService.AddCollege(collegeModel));
+            return Ok(_collegeService.College(collegeModel));
         }
 
         [HttpPut]
-        public IActionResult UpdateCollege(CollegeModel collegeModel, int id)
+        public IActionResult College(CollegeModel collegeModel, int id)
         {
-            return Ok(_collegeService.UpdateCollege(collegeModel, id));
+            return Ok(_collegeService.College(collegeModel, id));
         }
 
         [HttpDelete]
-        public IActionResult DeleteCollege(int id)
+        public IActionResult Delete(int id)
         {
-            return Ok(_collegeService.DeleteCollege(id));
+            return Ok(_collegeService.Delete(id));
         }
     }
 }

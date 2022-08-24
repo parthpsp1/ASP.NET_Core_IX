@@ -1,9 +1,4 @@
-﻿using Restful_CRUD_API_Repo_Pattern.Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Restful_CRUD_API_Repo_Pattern.Entity
 {

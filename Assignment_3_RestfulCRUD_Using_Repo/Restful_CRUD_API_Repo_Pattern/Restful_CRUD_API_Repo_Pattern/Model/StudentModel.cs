@@ -5,7 +5,6 @@ namespace Restful_CRUD_API_Repo_Pattern.Model
 {
     public class StudentModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]

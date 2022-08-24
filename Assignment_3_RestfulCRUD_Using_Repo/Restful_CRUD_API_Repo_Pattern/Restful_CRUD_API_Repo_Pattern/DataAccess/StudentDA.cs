@@ -8,11 +8,11 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
 {
     public interface IStudentDA {
 
-        public IEnumerable<StudentEntity> GetStudents();
-        public StudentEntity GetStudenyById(int id);
-        public Task<StudentEntity> AddStudent(StudentEntity studentObj);
-        public StudentEntity UpdateStudent(StudentEntity student, int Id);
-        public StudentEntity DeletStudent(int id);
+        IEnumerable<Student> Students();
+        Student Students(int id);
+        Task<Student> Student(Student studentObj);
+        Student Student(Student student, int Id);
+        bool Delete(int id);
 
     };
     public class StudentDA : IStudentDA
@@ -23,20 +23,24 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             _context = context;
         }
 
-        public IEnumerable<StudentEntity> GetStudents()
+        public IEnumerable<Student> Students()
         {
-            return _context.Student_Table.ToList();
+            return _context.Students.ToList();
         }
-        public async Task<StudentEntity> AddStudent(StudentEntity studentObj)
+        public Student Students(int id)
         {
-            var add_student_obj = await _context.Student_Table.AddAsync(studentObj);
+            return _context.Students.FirstOrDefault(s => s.Id == id);
+        }
+        public async Task<Student> Student(Student studentObj)
+        {
+            var add_student_obj =  await _context.Students.AddAsync(studentObj);
             _context.SaveChanges();
             return add_student_obj.Entity;
         }
 
-        public StudentEntity UpdateStudent(StudentEntity student, int Id)
+        public Student Student(Student student, int Id)
         {
-            var update_student_obj =  _context.Student_Table.Where(s => s.Id == Id).ToList();
+            var update_student_obj =  _context.Students.Where(s => s.Id == Id).ToList();
             foreach(var element in update_student_obj)
             {
                 if(Id == element.Id)
@@ -47,7 +51,7 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
                     element.Email = student.Email;
                     element.DateOfBirth = student.DateOfBirth;
                     element.CollegeId = student.CollegeId;
-                    var updated_data = _context.Student_Table.Update(element);
+                    var updated_data = _context.Students.Update(element);
                     _context.SaveChanges();
                     return updated_data.Entity;
                 }
@@ -55,21 +59,17 @@ namespace Restful_CRUD_API_Repo_Pattern.DataAccess
             return student;
         }
 
-        public StudentEntity DeletStudent(int id)
+        public bool Delete(int id)
         {
-            var delete_student_obj = _context.Student_Table.Where(s => s.Id == id).FirstOrDefault();
+            var delete_student_obj = _context.Students.Where(s => s.Id == id).FirstOrDefault();
             if (delete_student_obj.Id == id)
             {
-                _context.Student_Table.Remove(delete_student_obj);
+                _context.Students.Remove(delete_student_obj);
                 _context.SaveChanges();
-                return delete_student_obj;
+                return true;
             }
-            return null;
+            return false;
         }
 
-        public StudentEntity GetStudenyById(int id)
-        {
-            return _context.Student_Table.FirstOrDefault(s => s.Id == id);
-        }
     }
 }

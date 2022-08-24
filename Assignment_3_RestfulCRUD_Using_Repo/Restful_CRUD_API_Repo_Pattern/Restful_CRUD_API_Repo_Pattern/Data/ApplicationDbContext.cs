@@ -15,8 +15,9 @@ namespace Restful_CRUD_API_Repo_Pattern.Data
 
         }
 
-        public DbSet<StudentEntity> Student_Table { get; set; }
-        public DbSet<CollegeEntity> College_Table { get; set; }
+        public DbSet<Student> Students { get; set; }
+
+        public DbSet<College> Colleges { get; set; }
 
     }
 }

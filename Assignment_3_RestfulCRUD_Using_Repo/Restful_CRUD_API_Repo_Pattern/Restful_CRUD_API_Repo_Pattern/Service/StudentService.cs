@@ -8,11 +8,11 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 {
     public interface IStudentService
     {
-        public IEnumerable<StudentModel> GetStudents();
+        public IEnumerable<StudentModel> Students();
         public StudentModel GetStudentById(int id);
-        public Task<StudentModel> AddStudent(StudentModel studentModel);
-        public StudentModel UpdateStudent(StudentModel studentModel, int Id);
-        public StudentEntity DeletStudent(int id);
+        public Task<StudentModel> Student(StudentModel studentModel);
+        public StudentModel Student(StudentModel studentModel, int Id);
+        public Student Delete(int id);
 
     }
     public class StudentService : IStudentService
@@ -22,9 +22,9 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         {
             _studentDA = studentDA;
         }
-        public IEnumerable<StudentModel> GetStudents()
+        public IEnumerable<StudentModel> Students()
         {
-            var all_students = _studentDA.GetStudents();
+            var all_students = _studentDA.Students();
             List<StudentModel> list = new();
             foreach (var student in all_students)
             {
@@ -42,9 +42,9 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             return list;
         }
 
-        public async Task<StudentModel> AddStudent(StudentModel studentModel)
+        public async Task<StudentModel> Student(StudentModel studentModel)
         {
-            var new_student_entity = new StudentEntity
+            var new_student_entity = new Student
             {
                 Id = studentModel.Id,
                 FirstName = studentModel.FirstName,
@@ -55,13 +55,13 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
                 CollegeId = studentModel.CollegeId,
             };
 
-            var add_student = await _studentDA.AddStudent(new_student_entity);
+            var add_student = await _studentDA.Student(new_student_entity);
             return new StudentModel { Id = add_student.Id };
         }
 
-        public StudentModel UpdateStudent(StudentModel studentModel, int Id)
+        public StudentModel Student(StudentModel studentModel, int Id)
         {
-            var update_student_entity = new StudentEntity
+            var update_student_entity = new Student
             {
                 FirstName = studentModel.FirstName,
                 LastName = studentModel.LastName,
@@ -70,14 +70,14 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
                 DateOfBirth = studentModel.DateOfBirth,
                 CollegeId = studentModel.CollegeId,
             };
-            var update_student = _studentDA.UpdateStudent(update_student_entity, Id);
+            var update_student = _studentDA.Student(update_student_entity, Id);
             return new StudentModel { Id = update_student.Id };
         }
 
-        public StudentEntity DeletStudent(int id)
+        public Student Delete(int id)
         {
-            var delete_data = _studentDA.DeletStudent(id);
-            return new StudentEntity
+            var delete_data = _studentDA.Delete(id);
+            return new Student
             {
                 Id = delete_data.Id,
                 FirstName = delete_data.FirstName,
@@ -87,7 +87,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 
         public StudentModel GetStudentById(int id)
         {
-            var student_by_id = _studentDA.GetStudenyById(id);
+            var student_by_id = _studentDA.Students(id);
             if (student_by_id == null)
                 return null;
             else

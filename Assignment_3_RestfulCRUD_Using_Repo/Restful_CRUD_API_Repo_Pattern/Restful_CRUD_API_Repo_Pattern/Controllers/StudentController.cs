@@ -17,7 +17,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         [HttpGet]
         public IActionResult GetStudent()
         {
-            return Ok(_studentService.GetStudents());
+            return Ok(_studentService.Students());
         }
 
         [HttpGet("{id}")]
@@ -27,20 +27,20 @@ namespace Restful_CRUD_API_Repo_Pattern.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddStudent(StudentModel studentModel)
+        public IActionResult Student(StudentModel studentModel)
         {
-            return Ok(_studentService.AddStudent(studentModel));
+            return Ok(_studentService.Student(studentModel));
         }
 
         [HttpPut]
-        public IActionResult UpdateStudent(StudentModel studentModel, int id)
+        public IActionResult Student(StudentModel studentModel, int id)
         {
-            return Ok(_studentService.UpdateStudent(studentModel, id));
+            return Ok(_studentService.Student(studentModel, id));
         }
         [HttpDelete]
         public IActionResult DeleteStudent(int id)
         {
-            return Ok(_studentService.DeletStudent(id));
+            return Ok(_studentService.Delete(id));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         public CollegeModel GetCollegeById(int id);
         public Task<CollegeModel> AddCollege(CollegeModel collegeModel);
         public CollegeModel UpdateCollege(CollegeModel collegeModel, int id);
-        public CollegeEntity DeleteCollege(int id);
+        public College DeleteCollege(int id);
     }
     public class CollegeService : ICollegeService
     {
@@ -23,7 +23,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
         }
         public IEnumerable<CollegeModel> GetCollege()
         {
-            var all_colleges = _collegeDA.GetColleges();
+            var all_colleges = _collegeDA.Colleges();
             List<CollegeModel> college_list = new();
             foreach (var element in all_colleges)
             {
@@ -58,7 +58,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 
         public async Task<CollegeModel> AddCollege(CollegeModel collegeModel)
         {
-            var new_college_entity = new CollegeEntity
+            var new_college_entity = new College
             {
                 Id = collegeModel.Id,
                 Name = collegeModel.Name,
@@ -73,7 +73,7 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
 
         public CollegeModel UpdateCollege(CollegeModel collegeModel, int Id)
         {
-            var update_college_entity = new CollegeEntity
+            var update_college_entity = new College
             {
                 Id = collegeModel.Id,
                 Name = collegeModel.Name,
@@ -84,10 +84,10 @@ namespace Restful_CRUD_API_Repo_Pattern.Service
             var update_college = _collegeDA.UpdateCollege(update_college_entity, Id);
             return new CollegeModel { Id = update_college.Id };
         }
-        public CollegeEntity DeleteCollege(int id)
+        public College DeleteCollege(int id)
         {
             var delete_data = _collegeDA.DeleteCollege(id);
-            return new CollegeEntity
+            return new College
             {
                 Id = delete_data.Id,
                 Name = delete_data.Name,
